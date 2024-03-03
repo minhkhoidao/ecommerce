@@ -1,2 +1,9 @@
 node_modules/
 dist/
+
+nodemon.json
+tsconfig.json
+commitlint.config.js
+!.prettierrc
+!.lintstagedrc.json
+!.eslintrc
