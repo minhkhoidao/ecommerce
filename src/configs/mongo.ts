@@ -1,9 +1,13 @@
 import mongoose from 'mongoose';
-import { countConnect } from '~/helpers/checkConnect';
+import { countConnect } from '../helpers/checkConnect.js';
+import config from './config.js';
 
+const {
+  database: { host, name, port },
+} = config;
 class MongoDB {
   private static instance: mongoose.Connection | null = null;
-  private readonly connectString = 'mongodb://localhost:27017';
+  private readonly connectString = `mongodb://${host}:${port}/${name}`;
 
   private constructor() {}
 
