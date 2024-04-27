@@ -26,9 +26,7 @@ export namespace AuthRepository {
         message: 'Failed to register shop',
       };
     }
-    // const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-    //   modulusLength: 4096,
-    // });
+
     return newShop;
   };
 }

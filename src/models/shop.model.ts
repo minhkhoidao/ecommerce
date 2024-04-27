@@ -1,4 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
+
+interface IShop extends Document {
+  name: string;
+  email: string;
+  password: string;
+  status: 'active' | 'inactive';
+  verify: boolean;
+  roles: any[];
+  id: string;
+}
 // Declare the Schema of the Mongo model
 const shopSchema = new mongoose.Schema({
   name: {
@@ -29,8 +39,12 @@ const shopSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  id: {
+    type: String,
+    required: true,
+  },
 });
 
-const ShopModel = mongoose.model('Shop', shopSchema);
+const ShopModel = mongoose.model<IShop>('Shop', shopSchema);
 
 export default ShopModel;
