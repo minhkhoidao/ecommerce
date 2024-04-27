@@ -1,33 +1,48 @@
-import compression from 'compression';
-import express from 'express';
-import helmet from 'helmet';
+import express, { Express } from 'express';
+import dotenv from 'dotenv';
 import morgan from 'morgan';
-import MongoDB from './configs/mongo';
-import { checkOverload } from './helpers/checkOverload';
+import cors from 'cors';
+import MongoDB from './configs/mongo.js';
+import AuthRoute from './routes/auth.route.js';
+import { checkOverload } from './helpers/checkOverload.js';
 
-const app = express();
+dotenv.config({ path: '.env' });
 
-//init middlewares
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(compression());
+const initializeMongoDB = () => {
+  MongoDB.getInstance();
+  checkOverload();
+};
 
-//init routes
-app.get('/', (req, res) => {
-  return res.status(200).json({ message: 'Hello World' });
-});
+const configureMiddleware = (app: Express) => {
+  app.use(express.json());
+  app.use(cors());
+  app.use(morgan('combined'));
+  app.use(express.urlencoded({ extended: true }));
+};
 
-//init db
-MongoDB.getInstance();
-checkOverload();
-//handling error
+const configureRoutes = (app: Express) => {
+  app.use('/api/v1/auth', AuthRoute);
+};
 
-const PORT = 5000;
+const startServer = (app: Express, port: string | number) => {
+  const server = app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  process.on('unhandledRejection', (err, promise) => {
+    console.log(`Logged error: ${err}`);
+    server.close(() => process.exit(1));
+  });
+};
 
-process.on('SIGINT', () => {
-  server.close(() => console.log('Server has been terminated'));
-});
+const createServer = () => {
+  const app = express();
+  const port = process.env.PORT ?? 3000;
+
+  initializeMongoDB();
+  configureMiddleware(app);
+  configureRoutes(app);
+  startServer(app, port);
+};
+
+createServer();
