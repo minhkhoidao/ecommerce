@@ -3,6 +3,7 @@ export namespace AuthEntity {
     name: string;
     email: string;
     password: string;
+    id?: string;
     roles?: string[];
   }
 }
