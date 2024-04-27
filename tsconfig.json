@@ -6,7 +6,8 @@
     "outDir": "dist", // Đường dẫn output cho thư mục build
     "esModuleInterop": true,
     "strict": true /* Enable all strict type-checking options. */,
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "forceConsistentCasingInFileNames": true
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"]

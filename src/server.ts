@@ -1,10 +1,10 @@
-import express, { Express } from 'express';
-import dotenv from 'dotenv';
-import morgan from 'morgan';
 import cors from 'cors';
-import MongoDB from './configs/mongo.js';
-import AuthRoute from './routes/auth.route.js';
-import { checkOverload } from './helpers/checkOverload.js';
+import dotenv from 'dotenv';
+import express, { Express } from 'express';
+import morgan from 'morgan';
+import MongoDB from './configs/mongo';
+import { checkOverload } from './helpers/checkOverload';
+import AuthRoute from './routes/auth.route';
 
 dotenv.config({ path: '.env' });
 

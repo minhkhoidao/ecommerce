@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { countConnect } from '../helpers/checkConnect.js';
-import config from './config.js';
+import config from './config';
+import { countConnect } from '../helpers/checkConnect';
 
 const {
   database: { host, name, port },
