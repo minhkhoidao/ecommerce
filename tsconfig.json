@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS", // Quy định output module được sử dụng
+    "module": "NodeNext", // Quy định output module được sử dụng
     "moduleResolution": "NodeNext",
     "target": "ES2022", // Target output cho code
     "outDir": "dist", // Đường dẫn output cho thư mục build
